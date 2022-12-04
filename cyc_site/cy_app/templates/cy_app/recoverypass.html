@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	{% load static %}
+    <link  rel="stylesheet" href="{% static 'cy_app/recoverdng.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container padding-bottom-3x mb-2 mt-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+
+          <form class="card mt-4" method="post" action="{% url 'checknew' %}">
+          {% csrf_token %}
+            <div class="card-body">
+              <div class="form-group">
+                <label for="email-for-pass">Enter your email address</label>
+                <input class="form-control" type="email" id="email-for-pass" name="email" required=""><small class="form-text text-muted">Enter the email address you used during the registration of the website.</small>
+              </div>
+                <div class="card-body">
+              <div class="form-group">
+                <label for="email-for-pass">Enter New Password</label>
+                <input class="form-control" type="password" name="passwo" required=""><small class="form-text text-muted">Enter the New Password To login into website</small>
+              </div>
+            </div>
+            </div>
+
+            <div class="card-footer">
+              <button class="btn btn-success" type="submit">CHANGE</button>
+
+            </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

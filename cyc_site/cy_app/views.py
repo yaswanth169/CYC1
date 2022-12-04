@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.mail import send_mail
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -54,3 +56,44 @@ def checkuser(request):
         else:
             return render(request,"cy_app/signin.html")
     return render(request,"cy_app/signin.html")
+
+def forgot1(request):
+    if request.method=="POST":
+        email=request.POST.get("email")
+        subject = 'Resert your pass'
+        message = 'HELLO, PLEASE RESET YOUR PASSWORD BY USING THE BELOW LINK ' \
+                  'http://127.0.0.1:8000/recoverypass/'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [email, ]
+        send_mail(subject, message, email_from, recipient_list)
+        return render(request,"cy_app/signin.html")
+    else:
+        return HttpResponse("NOT SENT ")
+
+
+def recoverypass(request):
+    return render(request,"cy_app/recoverypass.html")
+
+def checknewpass(request):
+    if request.method=="POST":
+        email=request.POST.get("email")
+        passwo=request.POST.get("passwo")
+        c=db.coll.find_one({'email':email})
+        if c["email"]==email:
+            db.coll.update_one({"email":email},{"$set":{"passwo":passwo}})
+            return render(request,"cy_app/signin.html")
+    #     if c["email"]==email:
+    #         db.coll.updateOne({email:email},{"$set": {passwo:passwo}})
+    #         return HttpResponse("Password Changed")
+    #     else:
+    #         return HttpResponse("Not Changed")
+    # else:
+    #     return HttpResponse("NOt Changed")
+
+def recoverdng(request):
+    return render(request,"cy_app/recoverydng.html")
+
+
+
+
+
